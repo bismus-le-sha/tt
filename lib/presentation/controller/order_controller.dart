@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:tt/data/exception/api_exception.dart';
+import 'package:tt/config/exception/api_exception.dart';
 import 'package:tt/domain/repository/order_repository.dart';
 import 'package:tt/presentation/state/order_state.dart';
 
@@ -7,8 +7,8 @@ class OrderController extends ValueNotifier<OrderState> {
   final OrderRepository _repository;
 
   OrderController({required OrderRepository repository})
-      : _repository = repository,
-        super(const OrderInitial());
+    : _repository = repository,
+      super(const OrderInitial());
 
   Future<void> createOrder() async {
     if (value is OrderLoading) return;
@@ -29,8 +29,7 @@ class OrderController extends ValueNotifier<OrderState> {
         'Server error (code $statusCode). Please try again later.',
       NetworkApiException() =>
         'No internet connection. Check your network and retry.',
-      TimeoutApiException() =>
-        'Request timed out. Please try again.',
+      TimeoutApiException() => 'Request timed out. Please try again.',
     };
   }
 }
