@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:tt/data/exception/api_exception.dart';
+import 'package:tt/config/exception/api_exception.dart';
+import 'package:tt/data/model/order_model.dart';
 import 'package:tt/domain/entity/order.dart';
 
 class OrderApi {
@@ -34,10 +35,7 @@ class OrderApi {
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body) as Map<String, dynamic>;
-        return Order(
-          id: json['id'].toString(),
-          status: 'created',
-        );
+        return OrderModel.fromJson(json);
       }
 
       throw ApiException.server(
